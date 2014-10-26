@@ -31,24 +31,23 @@ makeCacheMatrix <- function(x = matrix()) {
     m
   }
   
-  list(set = set, get = get,  	 	# allows us to call the individual functions
-       setinverse = setinverse, 	# of makeCacheMatrix
+  list(set = set, get = get,  	 	# allows us to call the individual functions...
+       setinverse = setinverse, 	# ... of makeCacheMatrix
        getinverse = getinverse)
 }
 
-## cacheSolve computes, caches and returns the inverse of 
-## the matrix input to makeCacheMatrix
+## cacheSolve computes, caches and returns the inverse of the input matrix
 
 cacheSolve <- function(x, ...) {
-  m <- x$getinverse()             	# assigns value of our global inverse cache  
-                                    # 'm' to local variable 'm'
+  m <- x$getinverse()             	# assigns value of our global inverse cache ... 
+                                    # ...'m' to local variable 'm'
   if(!is.null(m)) {
     message("getting cached data")
   }                                
   
-  data <- x$get()                   # If the cache is null, use 'get' from makeCacheMatrix
-                                    # makeCacheMatrix to assign input 'x' to 'data'
-  m <- solve(data, ...)             # use solve to calculate the inverse, assign to 'm'
+  data <- x$get()                   # If the cache is null, use 'get' from ...
+                                    # ... makeCacheMatrix to assign input 'x' to 'data'
+  m <- solve(data, ...)             # use solve to calculate the inverse and assign to 'm'
   x$setinverse(m)                   # use "setinverse' to update cache
   m	              					
 }
