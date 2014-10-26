@@ -13,11 +13,11 @@
 
 makeCacheMatrix <- function(x = matrix()) {
   
-  m <- NULL     	# initial declaration of 'm', the inverse cache
+  m <- NULL       # initial declaration of 'm', the inverse cache
   
-  set <- function(y) {  # function to modify the current matrix
-    x <<- y			    	# assigns newly input y to outside variable 'x'
-    m <<- NULL			  # resets inverse cache 'm' to NULL
+  set <- function(y) { 	# function to modify the current matrix
+    x <<- y			    # assigns newly input y to outside variable 'x'
+    m <<- NULL			# resets inverse cache 'm' to NULL
   }                  	
   
   
@@ -27,7 +27,7 @@ makeCacheMatrix <- function(x = matrix()) {
   setinverse <- function(inverse) { #  function to update our inverse cache 'm' 
     m <<- inverse
   }
-  getinverse <- function() {  # function to return the current inverse stored in 'm'
+  getinverse <- function() {  
     m
   }
   
@@ -43,14 +43,12 @@ cacheSolve <- function(x, ...) {
   m <- x$getinverse()             	# assigns value of our global inverse cache  
                                     # 'm' to local variable 'm'
   if(!is.null(m)) {
-    message("getting cached data")  # If the cache value is not null then print
-    return(m)                       # message
+    message("getting cached data")
   }                                
   
-  data <- x$get()                   # If the cache is null, use 'get' from 
-                                    # makeCacheMatrix to assign input matrix to
-                                    # variable 'data'
-  m <- solve(data, ...)           
-  x$setinverse(m)                   # update cache 'm' with new inverse value
-  m								                	# return m
+  data <- x$get()                   # If the cache is null, use 'get' from makeCacheMatrix
+                                    # makeCacheMatrix to assign input 'x' to 'data'
+  m <- solve(data, ...)             # use solve to calculate the inverse, assign to 'm'
+  x$setinverse(m)                   # use "setinverse' to update cache
+  m	              					
 }
